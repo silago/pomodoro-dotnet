@@ -45,7 +45,6 @@ namespace pomodoro_dotnet
             var path = GetPath();
             var content = File.ReadAllText(path);
             var data = content.Split(',');
-            Console.WriteLine(content);
             return new Settings() {WorkTime = int.Parse(data[0]), RestTime = int.Parse(data[1])};
         }
 
