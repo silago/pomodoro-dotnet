@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30711.63
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pomodoro-dotnet", "pomodoro-dotnet.csproj", "{74E0A423-B2B2-42D6-AB72-23304F8D7142}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "pomodoro-dotnet", "pomodoro-dotnet.csproj", "{74E0A423-B2B2-42D6-AB72-23304F8D7142}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{3F78A10D-349B-4C8C-93F9-268A1A6021DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,9 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{74E0A423-B2B2-42D6-AB72-23304F8D7142}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -30,5 +29,17 @@ Global
 		{74E0A423-B2B2-42D6-AB72-23304F8D7142}.Release|x64.Build.0 = Release|Any CPU
 		{74E0A423-B2B2-42D6-AB72-23304F8D7142}.Release|x86.ActiveCfg = Release|Any CPU
 		{74E0A423-B2B2-42D6-AB72-23304F8D7142}.Release|x86.Build.0 = Release|Any CPU
+		{3F78A10D-349B-4C8C-93F9-268A1A6021DE}.Debug|Any CPU.ActiveCfg = Debug
+		{3F78A10D-349B-4C8C-93F9-268A1A6021DE}.Debug|x64.ActiveCfg = Debug
+		{3F78A10D-349B-4C8C-93F9-268A1A6021DE}.Debug|x86.ActiveCfg = Debug
+		{3F78A10D-349B-4C8C-93F9-268A1A6021DE}.Release|Any CPU.ActiveCfg = Release
+		{3F78A10D-349B-4C8C-93F9-268A1A6021DE}.Release|x64.ActiveCfg = Release
+		{3F78A10D-349B-4C8C-93F9-268A1A6021DE}.Release|x86.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A6F91C6E-C26B-444B-B1E9-191BCA34112E}
 	EndGlobalSection
 EndGlobal

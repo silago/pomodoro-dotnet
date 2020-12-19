@@ -12,6 +12,7 @@ namespace pomodoro_dotnet
         string _workIcon;
 
 
+
         public void OnStateChanged(State state) {
 
             string icon = string.Empty;
@@ -26,35 +27,28 @@ namespace pomodoro_dotnet
                     icon = _workIcon;
                     break;                
             }
-
-            this.File = icon;
+            this.Pixbuf = new Pixbuf(icon);
         }
 
-        public TrayIcon(string workIcon, string stopIcon, string restIcon, Menu menu = null) : base(stopIcon)  {
+        public TrayIcon(string workIcon, string stopIcon, string restIcon, Menu menu = null) : base(new Pixbuf(stopIcon))  {
 
                 _workIcon = workIcon;
                 _stopIcon = stopIcon;
                 _restIcon = restIcon;
-                this.File = _stopIcon;
                 this.ButtonPressEvent+=OnButtonPressEvent;
-                this.PopupMenu+= OnPopupMenu;
                 this.menu = menu;
-        }
-
-        private void OnPopupMenu(object o, PopupMenuArgs args) {
-            if (menu!=null) {
-                menu.ShowAll();
-                menu.Popup();
-            }
+                
         }
 
         private void OnButtonPressEvent(object o, ButtonPressEventArgs args)
         {
             var btn = args.Event.Button;
-            if (btn!=1) {
-                return;
+            if (btn==1) {
+                OnLeftClick.Invoke();
+            } else if (menu!=null) {
+                menu.ShowAll();
+                menu.Popup(null, null, null, btn, args.Event.Time);                           
             }
-            OnLeftClick.Invoke();
         }
     }
 }

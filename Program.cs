@@ -21,7 +21,7 @@ namespace pomodoro_dotnet
             var menu = new TrayPopupMenu();
             var trayIcon = new TrayIcon("hammers.png", "pause.png", "coffee.png", menu);
             var notificator = PopupWindow.Init("Popup.glade");
-
+            
 
             menu.closeButton.Activated    += delegate { Application.Quit(); };
             menu.settingsButton.Activated += delegate { settingsWindow.Show(); };
