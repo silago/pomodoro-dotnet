@@ -8,9 +8,9 @@ namespace pomodoro_dotnet
 {
     partial class Program
     {
-        static string settingsPath = "Settings.cfg";
+        static string settingsPath = "Resources/Settings.cfg";
 #if Windows
-        private const String APP_ID = "SoftPossum.PomodoroDotNet";
+        private const String APP_ID = "pomodoro .Net";
 #endif
         [STAThread]
         public static void Main(string[] args)
@@ -21,24 +21,34 @@ namespace pomodoro_dotnet
             var application    = new App(settings, token);
             var settingsWindow = SettingsWindow.Init(settings);
             var menu = new TrayPopupMenu();
-            var trayIcon = new TrayIcon("hammers.png", "pause.png", "coffee.png", menu);
+            
+            var trayIcon = new TrayIcon("Resources/hammers.png", "Resources/pause.png", "Resources/coffee.png", menu);
+       
             IPopup notificator;
 #if Linux
             notificator = new GladePopupWindow("Popup.glade");
 #elif Windows
             notificator = new ToastPopup(APP_ID);
 #endif
-
-            menu.closeButton.Activated    += delegate { Application.Quit(); };
-            menu.settingsButton.Activated += delegate { settingsWindow.Show(); };
+            
+            menu.closeButton.Activated    += delegate {
+                Application.Quit(); 
+            };
+            menu.settingsButton.Activated += delegate {
+                settingsWindow.Show(); 
+            };
 
             trayIcon.OnLeftClick += delegate { application.ToggleState(); };
             application.StateChanged += trayIcon.OnStateChanged;
             application.StateChanged += notificator.OnStateChanged;
             settingsWindow.UpdatedSettings += application.SetSettings;
             settingsWindow.UpdatedSettings += SaveSettings;
-
-            Application.Run();
+            using (menu)
+            using (settingsWindow)
+            using (trayIcon)
+            {
+                Application.Run();
+            }
         }
 
         public static string GetPath() {
