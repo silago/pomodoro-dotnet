@@ -9,7 +9,9 @@ namespace pomodoro_dotnet
     partial class Program
     {
         static string settingsPath = "Settings.cfg";
-        
+#if Windows
+        private const String APP_ID = "SoftPossum.PomodoroDotNet";
+#endif
         [STAThread]
         public static void Main(string[] args)
         {
@@ -20,8 +22,12 @@ namespace pomodoro_dotnet
             var settingsWindow = SettingsWindow.Init(settings);
             var menu = new TrayPopupMenu();
             var trayIcon = new TrayIcon("hammers.png", "pause.png", "coffee.png", menu);
-            var notificator = PopupWindow.Init("Popup.glade");
-            
+            IPopup notificator;
+#if Linux
+            notificator = new GladePopupWindow("Popup.glade");
+#elif Windows
+            notificator = new ToastPopup(APP_ID);
+#endif
 
             menu.closeButton.Activated    += delegate { Application.Quit(); };
             menu.settingsButton.Activated += delegate { settingsWindow.Show(); };
