@@ -26,7 +26,8 @@ namespace pomodoro_dotnet
        
             IPopup notificator;
 #if Linux
-            notificator = new GladePopupWindow("Popup.glade");
+            //notificator = new GladePopupWindow("Popup.glade");
+            notificator = new LibnotifyPopup();
 #elif Windows
             notificator = new ToastPopup(APP_ID);
 #endif

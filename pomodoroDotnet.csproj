@@ -39,6 +39,7 @@
 
   <ItemGroup>
     <PackageReference Include="GtkSharp" Version="3.22.25.*" />
+    <PackageReference Include="libnotify.net" Version="0.0.4" />
     <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="6.1.1" />
   </ItemGroup>
 
