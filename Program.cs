@@ -22,26 +22,25 @@ namespace pomodoro_dotnet
             var settings       = LoadSettings();
             var application    = new App(settings, token);
             var settingsWindow = new SettingsWindow(settings);
-            var menu = new TrayPopupMenu();
             var s = Path.DirectorySeparatorChar;
             ITrayIcon trayIcon;
-       
+            ITrayPopupMenu menu;
             IPopup notificator;
 #if Linux
-            trayIcon = new TrayIconGtk("Resources/hammers.png", "Resources/pause.png", "Resources/coffee.png", menu);
+            var _menu = new TrayPopupMenuGtk();
+            trayIcon = new TrayIconGtk("Resources/hammers.png", "Resources/pause.png", "Resources/coffee.png", _menu);
             //notificator = new GladePopupWindow("Popup.glade");
             notificator = new LibnotifyPopup();
+            menu = _menu;
 #elif Windows
-            trayIcon = new TrayIconEto("Resources/hammers.png", "Resources/pause.png", "Resources/coffee.png", menu);
+            var _menu = new TrayPopupMenuEto();
+            trayIcon = new TrayIconEto("Resources/hammers.png", "Resources/pause.png", "Resources/coffee.png", _menu);
             notificator = new ToastPopup(APP_ID);
+            menu = _menu;
 #endif
             
-            menu.closeButton.Click    += delegate {
-                app.Quit(); 
-            };
-            menu.settingsButton.Click += delegate {
-                settingsWindow.Show(); 
-            };
+            menu.OnClose += app.Quit;
+            menu.OnSettings += settingsWindow.Show;
 
             trayIcon.OnLeftClick += delegate { application.ToggleState(); };
             application.StateChanged += trayIcon.OnStateChanged;
