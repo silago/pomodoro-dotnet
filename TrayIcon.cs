@@ -1,6 +1,7 @@
 using System;
 using Eto.Forms;
 using Eto.Drawing;
+using System.IO;
 
 namespace pomodoro_dotnet
 {
@@ -10,8 +11,6 @@ namespace pomodoro_dotnet
         Bitmap _restIcon;
         Bitmap _stopIcon;
         Bitmap _workIcon;
-
-
 
         public void OnStateChanged(State state) {
             string icon = string.Empty;
@@ -27,50 +26,39 @@ namespace pomodoro_dotnet
                     break;                
             }
         }
+#if Windows
 
+        private static Bitmap ToEtoImage(String str)
+        {
+            Bitmap btm;
+
+            using (FileStream stream = new FileStream(str, FileMode.Open, FileAccess.Read))
+            {
+                btm = new Bitmap(stream);
+            
+            }
+            return btm;
+        }
+#endif
         public TrayIcon(string workIcon, string stopIcon, string restIcon, ContextMenu menu = null)  : base() { 
-            Console.WriteLine("XX");
+#if Windows
+            _workIcon = ToEtoImage(workIcon);
+            _stopIcon = ToEtoImage(stopIcon);
+            _restIcon = ToEtoImage(restIcon);
 
-                _workIcon = new Bitmap(workIcon);
+#else
+_workIcon = Bitmap.FromResource(workIcon);
                 _stopIcon = new Bitmap(stopIcon);
                 _restIcon = new Bitmap(restIcon);
-                this.Image = _stopIcon;
-                this.Activated += onActivatedMenu;
-                
-                
-                //this.ButtonPressEvent+=OnButtonPressEvent;
-                this.Menu = menu;
-                menu.Opening += OnOpening;
-                this.Show();
+#endif
+            this.Image = _stopIcon;
+            this.Activated += onActivatedMenu;
+            this.Menu = menu;
+             this.Show();
         }
-
-        private void OnOpening(object sender, EventArgs e)
-        {
-            Console.WriteLine("On OPening");
-        }
-
-        protected override void OnActivated(EventArgs e) {
-            Console.WriteLine("On Activated");
-        }
-
         private void onActivatedMenu(object sender, EventArgs e)
-        {
-            
-            Console.WriteLine("On Activated");
-            //OnLeftClick();
+        {          
+           OnLeftClick();
         }
-        /*
-
-private void OnActivated(EventArgs e)
-{
-   //var btn = args.Event.Button;
-   //if (btn==1) {
-       OnLeftClick.Invoke();
-   //} else if (menu!=null) {
-   //    menu.ShowAll();
-   //    menu.Popup(null, null, null, btn, args.Event.Time);                           
-   //}
-}
-*/
     }
 }

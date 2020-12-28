@@ -3,14 +3,13 @@ using System.IO;
 using System.Reflection;
 using System.Threading;
 using Eto.Forms;
-using Eto.Drawing;
 
 
 namespace pomodoro_dotnet
 {
     partial class Program
     {
-        static string settingsPath = "Resources/Settings.cfg";
+        static string settingsPath = "Resources"+Path.DirectorySeparatorChar+"Settings.cfg";
 #if Windows
         private const String APP_ID = "pomodoro .Net";
 #endif
@@ -24,7 +23,7 @@ namespace pomodoro_dotnet
             var application    = new App(settings, token);
             var settingsWindow = new SettingsWindow(settings);
             var menu = new TrayPopupMenu();
-            
+            var s = Path.DirectorySeparatorChar;
             var trayIcon = new TrayIcon("Resources/hammers.png", "Resources/pause.png", "Resources/coffee.png", menu);
        
             IPopup notificator;
