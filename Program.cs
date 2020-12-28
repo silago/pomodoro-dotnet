@@ -2,7 +2,9 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Threading;
-using Gtk;
+using Eto.Forms;
+using Eto.Drawing;
+
 
 namespace pomodoro_dotnet
 {
@@ -15,11 +17,12 @@ namespace pomodoro_dotnet
         [STAThread]
         public static void Main(string[] args)
         {
-            Application.Init();
+            var app = new Application();
+            //Application.Init();
             CancellationToken token = new CancellationToken();
             var settings       = LoadSettings();
             var application    = new App(settings, token);
-            var settingsWindow = SettingsWindow.Init(settings);
+            var settingsWindow = new SettingsWindow(settings);
             var menu = new TrayPopupMenu();
             
             var trayIcon = new TrayIcon("Resources/hammers.png", "Resources/pause.png", "Resources/coffee.png", menu);
@@ -32,10 +35,10 @@ namespace pomodoro_dotnet
             notificator = new ToastPopup(APP_ID);
 #endif
             
-            menu.closeButton.Activated    += delegate {
-                Application.Quit(); 
+            menu.closeButton.Click    += delegate {
+                app.Quit(); 
             };
-            menu.settingsButton.Activated += delegate {
+            menu.settingsButton.Click += delegate {
                 settingsWindow.Show(); 
             };
 
@@ -44,11 +47,11 @@ namespace pomodoro_dotnet
             application.StateChanged += notificator.OnStateChanged;
             settingsWindow.UpdatedSettings += application.SetSettings;
             settingsWindow.UpdatedSettings += SaveSettings;
-            using (menu)
+            //using (menu)
             using (settingsWindow)
             using (trayIcon)
             {
-                Application.Run();
+                app.Run();
             }
         }
 
@@ -69,13 +72,6 @@ namespace pomodoro_dotnet
             var path = GetPath();
             var data = settings.WorkTime + "," + settings.RestTime;
             File.WriteAllText(path, data);
-        }
-
-
-        public static void ShowMenu()
-        {
-            var popup = new Menu();
-            var exitItem = new MenuItem("Quit"); 
         }
     }
 }

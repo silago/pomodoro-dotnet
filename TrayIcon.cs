@@ -1,54 +1,76 @@
 using System;
-using Gtk;
-using Gdk;
+using Eto.Forms;
+using Eto.Drawing;
 
 namespace pomodoro_dotnet
 {
-    public class TrayIcon : StatusIcon {
+    public class TrayIcon : TrayIndicator {
         public event System.Action OnLeftClick;
         Menu menu;
-        string _restIcon;
-        string _stopIcon;
-        string _workIcon;
+        Bitmap _restIcon;
+        Bitmap _stopIcon;
+        Bitmap _workIcon;
 
 
 
         public void OnStateChanged(State state) {
-
             string icon = string.Empty;
             switch (state) {
                 case State.Resting:
-                    icon = _restIcon;
+                    Image = _restIcon;
                     break;
                 case State.Stopped:
-                    icon = _stopIcon;
+                    Image = _stopIcon;
                     break;
                 case State.Working:
-                    icon = _workIcon;
+                    Image = _workIcon;
                     break;                
             }
-            this.Pixbuf = new Pixbuf(icon);
         }
 
-        public TrayIcon(string workIcon, string stopIcon, string restIcon, Menu menu = null) : base(new Pixbuf(stopIcon))  {
+        public TrayIcon(string workIcon, string stopIcon, string restIcon, ContextMenu menu = null)  : base() { 
+            Console.WriteLine("XX");
 
-                _workIcon = workIcon;
-                _stopIcon = stopIcon;
-                _restIcon = restIcon;
-                this.ButtonPressEvent+=OnButtonPressEvent;
-                this.menu = menu;
+                _workIcon = new Bitmap(workIcon);
+                _stopIcon = new Bitmap(stopIcon);
+                _restIcon = new Bitmap(restIcon);
+                this.Image = _stopIcon;
+                this.Activated += onActivatedMenu;
                 
+                
+                //this.ButtonPressEvent+=OnButtonPressEvent;
+                this.Menu = menu;
+                menu.Opening += OnOpening;
+                this.Show();
         }
 
-        private void OnButtonPressEvent(object o, ButtonPressEventArgs args)
+        private void OnOpening(object sender, EventArgs e)
         {
-            var btn = args.Event.Button;
-            if (btn==1) {
-                OnLeftClick.Invoke();
-            } else if (menu!=null) {
-                menu.ShowAll();
-                menu.Popup(null, null, null, btn, args.Event.Time);                           
-            }
+            Console.WriteLine("On OPening");
         }
+
+        protected override void OnActivated(EventArgs e) {
+            Console.WriteLine("On Activated");
+        }
+
+        private void onActivatedMenu(object sender, EventArgs e)
+        {
+            
+            Console.WriteLine("On Activated");
+            //OnLeftClick();
+        }
+        /*
+
+private void OnActivated(EventArgs e)
+{
+   //var btn = args.Event.Button;
+   //if (btn==1) {
+       OnLeftClick.Invoke();
+   //} else if (menu!=null) {
+   //    menu.ShowAll();
+   //    menu.Popup(null, null, null, btn, args.Event.Time);                           
+   //}
+}
+*/
     }
 }
