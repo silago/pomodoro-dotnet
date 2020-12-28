@@ -1,3 +1,4 @@
+#if Linux
 using Notify;
 
 namespace pomodoro_dotnet
@@ -11,3 +12,4 @@ namespace pomodoro_dotnet
         }
     }
 }
+#endif

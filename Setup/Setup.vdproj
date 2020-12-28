@@ -15,7 +15,7 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_4312961C29054B749F9A4A56C059853F"
+        "MsmKey" = "8:_1F86B397E245486DB4583F84381C668F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -221,7 +221,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Pomodoro"
         "ProductCode" = "8:{21C50F02-6DD6-40AB-9911-DC7591C2B903}"
-        "PackageCode" = "8:{55BAA537-E8DD-45F8-8EDD-B2FA60045E82}"
+        "PackageCode" = "8:{5177838A-3E0E-41F1-B839-E12B0F464719}"
         "UpgradeCode" = "8:{F2BB6450-ACC5-4052-BAA5-8C760A14B9E5}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -341,30 +341,30 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_11F399BEF62C49E4B2A5819EB0615F91"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_4F80CD3A1CF24EEAB5DC007A6B5B02CF"
             {
-            "Name" = "8:Pomodoro"
+            "Name" = "8:pomodoro"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_4312961C29054B749F9A4A56C059853F"
-            "Folder" = "8:_28972B10C097423AA9BD865CF518C041"
+            "Target" = "8:_1F86B397E245486DB4583F84381C668F"
+            "Folder" = "8:_385AB15E47984D1DAA7FFEAFBCD7BB74"
             "WorkingFolder" = "8:_CD07B0FD909F4D1FA9195D29421AF216"
             "Icon" = "8:_F2820C6AE73647599299AA850ACC1E90"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_91997B49BF774AD1857335337940C897"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_CF37D726C82742B5ABACE5EAC6D3F7B4"
             {
-            "Name" = "8:Pomodoro"
+            "Name" = "8:pomodoro"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_4312961C29054B749F9A4A56C059853F"
-            "Folder" = "8:_385AB15E47984D1DAA7FFEAFBCD7BB74"
+            "Target" = "8:_1F86B397E245486DB4583F84381C668F"
+            "Folder" = "8:_28972B10C097423AA9BD865CF518C041"
             "WorkingFolder" = "8:_CD07B0FD909F4D1FA9195D29421AF216"
             "Icon" = "8:_F2820C6AE73647599299AA850ACC1E90"
             "Feature" = "8:"
@@ -768,9 +768,9 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_316603B36B0647BEB95BAD541CF321BF"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_1F86B397E245486DB4583F84381C668F"
             {
-            "SourcePath" = "8:"
+            "SourcePath" = "8:..\\obj\\Release\\netcoreapp3.1\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_CD07B0FD909F4D1FA9195D29421AF216"
@@ -789,38 +789,9 @@
             "IsolateTo" = "8:"
             "ProjectOutputGroupRegister" = "3:1"
             "OutputConfiguration" = "8:"
-            "OutputGroupCanonicalName" = "8:BuiltProjectOutputGroupDependencies"
+            "OutputGroupCanonicalName" = "8:PublishItems"
             "OutputProjectGuid" = "8:{74E0A423-B2B2-42D6-AB72-23304F8D7142}"
             "ShowKeyOutput" = "11:TRUE"
-                "ExcludeFilters"
-                {
-                }
-            }
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_4312961C29054B749F9A4A56C059853F"
-            {
-            "SourcePath" = "8:..\\bin\\Release\\netcoreapp3.1\\publish\\pomodoroDotnet.exe"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_CD07B0FD909F4D1FA9195D29421AF216"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:"
-            "OutputGroupCanonicalName" = "8:PublishItemsOutputGroup"
-            "OutputProjectGuid" = "8:{74E0A423-B2B2-42D6-AB72-23304F8D7142}"
-            "ShowKeyOutput" = "11:TRUE"
-            "PublishProfilePath" = "8:Properties\\PublishProfiles\\FolderProfile.pubxml"
                 "ExcludeFilters"
                 {
                 }

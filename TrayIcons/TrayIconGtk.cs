@@ -1,3 +1,4 @@
+#if Linux
 using System;
 using Gtk;
 using Gdk;
@@ -52,3 +53,4 @@ namespace pomodoro_dotnet
         }
     }
 }
+#endif

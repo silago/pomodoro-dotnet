@@ -1,3 +1,4 @@
+#if Linux
 using Gtk;
 
 namespace pomodoro_dotnet
@@ -16,3 +17,4 @@ namespace pomodoro_dotnet
         public event System.Action OnSettings;
     }
 }
+#endif

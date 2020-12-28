@@ -13,8 +13,6 @@
     <AssemblyOriginatorKeyFile>keystore.snk</AssemblyOriginatorKeyFile> 
    </PropertyGroup>
    <PropertyGroup Condition="'$(IsWindows)'=='true'">
-    <PublishSingleFile>true</PublishSingleFile>
-    <RuntimeIdentifier>win10-x64</RuntimeIdentifier>
     <UseWindowsForms>true</UseWindowsForms>
     <DefineConstants>Windows</DefineConstants>
   </PropertyGroup>
@@ -39,7 +37,6 @@
 
   <ItemGroup>
           <!-- <PackageReference Include="GtkSharp" Version="3.22.25.*" /> -->
-    <PackageReference Include="libnotify.net" Version="0.0.4" />
     <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="6.1.1" />
     <PackageReference Include="Eto.Forms" Version="2.5.8" />
 
@@ -48,9 +45,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Condition="'$(IsWindows)' == 'true'" Include="Microsoft.Windows.SDK.Contracts" Version="10.0.19041.0" />
     <PackageReference Condition="'$(IsWindows)' == 'true'" Include="Eto.Platform.WPF" Version="2.5.8" />
     <PackageReference Condition="'$(IsLinux)' == 'true'" Include="Eto.Platform.Gtk" Version="2.5.8" />
+    <PackageReference Condition="'$(IsLinux)' == 'true'" Include="libnotify.net" Version="0.0.4" />
   </ItemGroup>
 
 
