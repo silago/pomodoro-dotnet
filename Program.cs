@@ -24,13 +24,15 @@ namespace pomodoro_dotnet
             var settingsWindow = new SettingsWindow(settings);
             var menu = new TrayPopupMenu();
             var s = Path.DirectorySeparatorChar;
-            var trayIcon = new TrayIcon("Resources/hammers.png", "Resources/pause.png", "Resources/coffee.png", menu);
+            ITrayIcon trayIcon;
        
             IPopup notificator;
 #if Linux
+            trayIcon = new TrayIconGtk("Resources/hammers.png", "Resources/pause.png", "Resources/coffee.png", menu);
             //notificator = new GladePopupWindow("Popup.glade");
             notificator = new LibnotifyPopup();
 #elif Windows
+            trayIcon = new TrayIconEto("Resources/hammers.png", "Resources/pause.png", "Resources/coffee.png", menu);
             notificator = new ToastPopup(APP_ID);
 #endif
             
@@ -48,7 +50,6 @@ namespace pomodoro_dotnet
             settingsWindow.UpdatedSettings += SaveSettings;
             //using (menu)
             using (settingsWindow)
-            using (trayIcon)
             {
                 app.Run();
             }

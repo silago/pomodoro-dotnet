@@ -5,7 +5,7 @@ using System.IO;
 
 namespace pomodoro_dotnet
 {
-    public class TrayIcon : TrayIndicator {
+    public class TrayIconEto : TrayIndicator, ITrayIcon {
         public event System.Action OnLeftClick;
         Menu menu;
         Bitmap _restIcon;
@@ -40,7 +40,7 @@ namespace pomodoro_dotnet
             return btm;
         }
 #endif
-        public TrayIcon(string workIcon, string stopIcon, string restIcon, ContextMenu menu = null)  : base() { 
+        public TrayIconEto(string workIcon, string stopIcon, string restIcon, ContextMenu menu = null)  : base() { 
 #if Windows
             _workIcon = ToEtoImage(workIcon);
             _stopIcon = ToEtoImage(stopIcon);
