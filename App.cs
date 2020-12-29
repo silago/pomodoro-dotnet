@@ -12,7 +12,19 @@ namespace pomodoro_dotnet
                 get { return _state; }
                 set {
                     _state = value;
-                    StateChanged?.Invoke(value);
+                    StateChanged?.Invoke(value);                    
+                    switch (value)
+                    {
+                        case (State.Resting):
+                            endTime = DateTime.Now.AddMilliseconds(RestTime);
+                            break;
+                        case (State.Working):
+                            endTime = DateTime.Now.AddMilliseconds(WorkTime);
+                            break;
+                        case (State.Stopped):
+                            endTime = DateTime.MaxValue;
+                            break;
+                    }
                 }
             }
             public event System.Action<State> StateChanged;
@@ -59,11 +71,11 @@ namespace pomodoro_dotnet
 
                     switch (state) {
                         case State.Working:
-                            endTime = DateTime.Now.AddMilliseconds(RestTime);
+                            //endTime = DateTime.Now.AddMilliseconds(RestTime);
                             state = State.Resting;
                             break;
                         case State.Resting:
-                            endTime = DateTime.Now.AddMilliseconds(WorkTime);
+                            //endTime = DateTime.Now.AddMilliseconds(WorkTime);
                             state = State.Working;
                             break;
                     }

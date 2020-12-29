@@ -25,27 +25,31 @@ namespace pomodoro_dotnet
             var s = Path.DirectorySeparatorChar;
             ITrayIcon trayIcon;
             ITrayPopupMenu menu;
-            IPopup notificator;
+            NotificationProxy notificator = new NotificationProxy();
+            notificator.SetSettings(settings);
 #if Linux
             var _menu = new TrayPopupMenuGtk();
             trayIcon = new TrayIconGtk("Resources/hammers.png", "Resources/pause.png", "Resources/coffee.png", _menu);
             //notificator = new GladePopupWindow("Popup.glade");
-            notificator = new LibnotifyPopup();
+            //notificator = new LibnotifyPopup();
             menu = _menu;
 #elif Windows
             var _menu = new TrayPopupMenuEto();
             trayIcon = new TrayIconEto("Resources/hammers.png", "Resources/pause.png", "Resources/coffee.png", _menu);
-            notificator = new ToastPopup(APP_ID);
+            //notificator = new ToastPopup(APP_ID);
+            //notificator = new EtoPopup();
             menu = _menu;
 #endif
             
             menu.OnClose += app.Quit;
             menu.OnSettings += settingsWindow.Show;
-
+            
             trayIcon.OnLeftClick += delegate { application.ToggleState(); };
             application.StateChanged += trayIcon.OnStateChanged;
             application.StateChanged += notificator.OnStateChanged;
             settingsWindow.UpdatedSettings += application.SetSettings;
+            settingsWindow.UpdatedSettings += notificator.SetSettings;
+
             settingsWindow.UpdatedSettings += SaveSettings;
             //using (menu)
             using (settingsWindow)
@@ -64,12 +68,12 @@ namespace pomodoro_dotnet
             var path = GetPath();
             var content = File.ReadAllText(path);
             var data = content.Split(',');
-            return new Settings() {WorkTime = int.Parse(data[0]), RestTime = int.Parse(data[1])};
+            return new Settings() {WorkTime = int.Parse(data[0]), RestTime = int.Parse(data[1]), NotificationType = int.Parse(data[2])};
         }
 
         public static void SaveSettings(Settings settings) {
             var path = GetPath();
-            var data = settings.WorkTime + "," + settings.RestTime;
+            var data = settings.WorkTime + "," + settings.RestTime +"," +settings.NotificationType;
             File.WriteAllText(path, data);
         }
     }

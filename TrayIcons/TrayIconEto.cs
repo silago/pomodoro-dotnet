@@ -7,7 +7,6 @@ namespace pomodoro_dotnet
 {
     public class TrayIconEto : TrayIndicator, ITrayIcon {
         public event System.Action OnLeftClick;
-        Menu menu;
         Bitmap _restIcon;
         Bitmap _stopIcon;
         Bitmap _workIcon;

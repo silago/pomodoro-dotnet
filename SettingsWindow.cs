@@ -1,6 +1,7 @@
 using System;
 using Eto.Forms;
 using Eto.Drawing;
+using System.ComponentModel;
 
 namespace pomodoro_dotnet
 {
@@ -12,11 +13,13 @@ namespace pomodoro_dotnet
         private Label _restLabel = new Label() { Text = "rest time", TextAlignment = TextAlignment.Left,  
             VerticalAlignment = VerticalAlignment.Center,
         };
+      
         private TextBox _workTime = new TextBox();
         private TextBox _restTime = new TextBox();
         private Button _saveBtn   = new Button() { Text = "Save" } ;
         private Button _cancelBtn = new Button() { Text = "Cancel" };
-
+        private int notificationId = 0;
+        private RadioButtonList rbl = new RadioButtonList { Orientation = RadioButtonListOrientation.Horizontal };
         public event System.Action<Settings> UpdatedSettings;
 
         private static double FromMsToMin(double i) {
@@ -29,6 +32,7 @@ namespace pomodoro_dotnet
 
         public SettingsWindow(Settings settings) 
         {
+            
             _workTime.Text = FromMsToMin(settings.WorkTime).ToString();
             _restTime.Text = FromMsToMin(settings.RestTime).ToString();
 
@@ -38,10 +42,12 @@ namespace pomodoro_dotnet
             Title = " Settings";
             Topmost = true;
             this.Content = layout;          
-            this.AbortButton   = new Button() { Text = "cancel" };
-            this.DefaultButton = new Button() { Text = "save" };
+            //this.AbortButton   = new Button() { Text = "Cancel" };
+            //this.DefaultButton = new Button() { Text = "Save" };
             this.Padding = new Eto.Drawing.Padding(10);
             this.Resizable  = false;
+            notificationId = settings.NotificationType;
+
         }
 
         private Control CreateSpace() {
@@ -55,18 +61,33 @@ namespace pomodoro_dotnet
               DefaultPadding = new Eto.Drawing.Padding(10), 
               DefaultSpacing = new Eto.Drawing.Size(5,5)
           };
-          var splitter = new Splitter();
+
+
+            rbl.Items.Add(new ListItem { Text = "Popup", Key = "0" });
+            rbl.Items.Add(new ListItem { Text = "Notification", Key = "1" });
+            rbl.SelectedKeyChanged += Rbl_SelectedKeyChanged;
+            rbl.SelectedKey = notificationId.ToString();
+            var splitter = new Splitter();
           layout.BeginVertical (); // create a fields section
           layout.AddRow (null, _restLabel,  _restTime);
 
           layout.AddRow (null,_workLabel ,  _workTime);
           layout.EndVertical ();
+            layout.BeginVertical(); // create a fields section
+            layout.AddRow(rbl);
+            layout.EndVertical();
 
-          layout.BeginVertical (); // create a fields section
-          layout.AddRow(null, _cancelBtn , _saveBtn);
+            layout.BeginVertical (); // create a fields section
+          layout.AddRow(null, _saveBtn, _cancelBtn);
           layout.EndVertical ();
 
+
           return layout;
+        }
+
+        private void Rbl_SelectedKeyChanged(object sender, EventArgs e)
+        {
+            notificationId = int.Parse(rbl.SelectedKey);
         }
 
         private void OnSave(object sender, EventArgs e)
@@ -74,25 +95,30 @@ namespace pomodoro_dotnet
             var restTime = (int)FromMinToMs(int.Parse(_restTime.Text));
             var workTime = (int)FromMinToMs(int.Parse(_workTime.Text));
             UpdatedSettings.Invoke(new Settings {
-                RestTime = restTime, WorkTime = workTime
+                RestTime = restTime, WorkTime = workTime, NotificationType = notificationId
             });
 
            this.Hide();
+           
         }
-
-        public void Show()
+        protected override void OnClosing(CancelEventArgs e)
         {
-            this.ShowModal();
+            e.Cancel = true;
+            Hide();
         }
-
         public void Hide()
         {
-            this.Close();
+            Visible = false;
+        }
+        public void Show()
+        {
+          
+            this.ShowModal();
         }
 
         private void OnCancel(object sender, EventArgs e)
         {
-           this.Hide();
+            this.Hide();
         }
     }
 }
