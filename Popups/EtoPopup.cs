@@ -5,7 +5,6 @@ using Eto.Forms;
 using Eto.Drawing;
 using System.ComponentModel;
 
-#if Windows
 namespace pomodoro_dotnet
 {
     public class EtoPopup : BasePopupWindow
@@ -69,5 +68,4 @@ namespace pomodoro_dotnet
         }
     }
 }
-#endif
 
