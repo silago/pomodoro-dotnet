@@ -97,13 +97,15 @@ namespace pomodoro_dotnet
             UpdatedSettings.Invoke(new Settings {
                 RestTime = restTime, WorkTime = workTime, NotificationType = notificationId
             });
-
+            
            this.Hide();
-           
+
         }
         protected override void OnClosing(CancelEventArgs e)
         {
+#if Windows
             e.Cancel = true;
+#endif
             Hide();
         }
         public void Hide()
@@ -112,7 +114,6 @@ namespace pomodoro_dotnet
         }
         public void Show()
         {
-          
             this.ShowModal();
         }
 

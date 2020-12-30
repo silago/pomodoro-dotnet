@@ -30,7 +30,6 @@ namespace pomodoro_dotnet
                     popup = new ToastPopup("pomodoro");
 #else
                     popup = new LibnotifyPopup();
-
 #endif
                     break;
 

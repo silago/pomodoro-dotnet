@@ -42,7 +42,9 @@ namespace pomodoro_dotnet
 
         private void OnClosing(object sender, CancelEventArgs e)
         {
+#if Windows
             e.Cancel = true;
+#endif
             Hide();
         }
 
